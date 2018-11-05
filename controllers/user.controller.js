@@ -23,21 +23,7 @@ module.exports.register = (req, res, next) => {
         tel: req.body.tel,
         nic: req.body.nic,
         password : req.body.password,
-        freeland :req.body.freeland,
-        sheltered: req.body.sheltered,
-        car:req.body.car,
-        bus:req.body.bus,
-        bicycle:req.body.bicycle,
-        van:req.body.van,
-        lorry:req.body.lorry,
-        other :req.body.other,
-        mweight :req.body.mweight,
-        mheight:req.body.mweight,
-        vehicles:req.body.vehicles,
-        street:req.body.street,
-        city:req.body.city,
-        state:req.body.state,
-        zip:req.body.zip,
+       
         temptoken:req.body.temptoken
         });
         user.save((err, doc) => {
