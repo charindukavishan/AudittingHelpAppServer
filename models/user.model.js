@@ -16,21 +16,7 @@ var userSchema = new mongoose.Schema({
         minlength: [4, 'Password must be atleast 4 character long']
     },
 tel:{type:String},
-    freeland : { type:  String  },
-    sheltered: { type:  String  },
-    car: { type:  String  },
-    bus: { type: String  },
-    bicycle:{ type: String  },
-    van: { type:  String },
-    lorry:{ type: String  },
-    other : { type:  String },
-    mweight : { type:  String  },
-    mheight:{ type: String  },
-    vehicles: { type: String },
-    street:{ type:  String  },
-    city: { type:  String },
-    state: { type:  String  },
-    zip:{ type:  String },
+    
     saltSecret:{type: String},
     temptoken:{type : String}
 });
