@@ -1,8 +1,17 @@
-const mongoose = require('mongoose');
-
-mongoose.connect(process.env.MONGODB_URI, (err) => {
-    if (!err) { console.log('MongoDB connection succeeded.'); }
-    else { console.log('Error in MongoDB connection : ' + JSON.stringify(err, undefined, 2)); }
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  database : 'university'
 });
+connection.connect(function(err){
+if(!err) {
+    console.log("Database is connected");
+} else {
+    console.log("Error while connecting with database");
+}
+});
+module.exports = connection; 
 
 require('./user.model');

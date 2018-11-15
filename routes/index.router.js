@@ -12,8 +12,6 @@ router.get('/getname/:email', ctrlUser.getname);
 router.put('/rstpw',ctrlUser.puttoken);
 router.get('/resetpassword/:token', ctrlUser.rstpw);
 router.put('/savepassword',ctrlUser.savepassword);
-router.post('/newPost', ctrlUser.newPost);
-router.get('/getPosts',ctrlUser.getPosts)
 module.exports = router;
 
 
