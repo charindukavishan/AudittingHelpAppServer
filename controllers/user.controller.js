@@ -8,6 +8,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 const Blog = require('../models/Post');
 var connection = require('../models/db');
 
+
 const User = mongoose.model('User');
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -73,7 +74,8 @@ connection.query('SELECT * FROM users WHERE _id = ?',req._id, function (error, r
        let user=results[0];
         if (!results)
         return res.status(404).json({ status: false, message: 'User record not found.' });
-    else{console.log('Im in backend');
+    else{
+        // console.log('Im in backend');
         return res.status(200).json({ status: true, user});}
       });
   
@@ -193,3 +195,58 @@ module.exports.savepassword=(req,res)=>{console.log(req.body)
 
 }
 }
+
+
+var multer  =   require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+      callback(null, './public/uploads');
+    },
+    filename: function (req, file, callback) {
+      console.log(file);
+      callback(null, Date.now()+'-'+file.originalname)
+    }
+  });
+
+  var upload = multer({storage: storage}).single('photo');
+
+
+module.exports.savefile=(req,res)=>{console.log('save')
+    upload(req,res,function(err){
+        if(err){
+            return res.status(501).json({error:err});
+        }
+        //do all database record saving activity
+        return res.json({originalname:req.file.originalname, uploadname:req.file.filename});
+    });
+}
+
+module.exports.users = (req, res, next) =>{
+connection.query('SELECT * FROM users WHERE role="user"', function (error, results, fields) {console.log('users')
+       let user=results;
+       console.log(user)
+        if (!results)
+        return res.status(404).json({ status: false, message: 'User record not found.' });
+    else{
+        // console.log('Im in backend');
+        return res.send( user);}
+      });
+  
+
+
+}
+
+
+module.exports.readmsg=(req,res)=>{console.log(req.params.file)
+    
+    connection.query('UPDATE files SET isRead = "yes" where filename = ?',req.params.file, function (error, results, fields) {
+        if(error){
+          return  res.json({sucsess:false,message:error})
+        }
+        else{
+            return res.json({sucsess:true,message:'message read'});
+        }
+       });
+
+}
+
