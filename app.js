@@ -19,7 +19,7 @@ app.all(function(req, res, next) { //allow cross origin requests
 });
 app.use(express.static(__dirname + '/uploads')); 
 app.use(cors({ origin: 'http://192.81.214.34:8080' }));
-
+app.use(bodyParser.urlencoded());
 // middleware
 app.use(bodyParser.json());
 
