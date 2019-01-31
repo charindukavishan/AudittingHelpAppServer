@@ -17,6 +17,7 @@ app.all(function(req, res, next) { //allow cross origin requests
     res.header("Access-Control-Allow-Credentials", true);
     next();
 });
+app.use(express.static(__dirname + '/public')); 
 app.use(cors({ origin: 'http://192.81.214.34:8080' }));
 
 // middleware
