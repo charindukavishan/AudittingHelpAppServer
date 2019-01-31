@@ -18,6 +18,7 @@ router.get('/users', ctrlUser.users);
 router.get('/readmsg/:file',ctrlUser.readmsg);
 
 router.post('/upload/:id',filecntrl.savefile);
+router.post('/updateprofilepic/:id',filecntrl.updateprofilepic);
 router.get('/files/:id',filecntrl.files)
 router.get('/file/:filename',filecntrl.file)
 router.get('/adminfile/:filename',filecntrl.adminfile)

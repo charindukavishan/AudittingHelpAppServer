@@ -29,21 +29,32 @@ module.exports.register = (req, res, next) => {
         "password" : req.body.password,
        "temptoken":"req.body.temptoken"
     }
-    
-    connection.query('INSERT INTO users SET ?',user, function (error, results, fields) {
-        if (error) {console.log(error);
-          res.json({
-              status:false,
-              message:'there are some error with query'
-          })
-        }else{
-            res.json({
-              status:true,
-              data:results,
-              message:'user registered sucessfully'
-          })
+    connection.query('SELECT * FROM users WHERE email = ?',req.body.email, function (error, results, fields) {
+        
+         if (!results.length){
+         connection.query('INSERT INTO users SET ?',user, function (error, results, fields) {
+            if (error) {console.log(error);
+              res.json({
+                  status:false,
+                  message:'there are some error with query'
+              })
+            }else{
+                res.json({
+                  status:true,
+                  data:results,
+                  message:'user registered sucessfully'
+              })
+            }
+          });
+        
+        
         }
-      });
+     else{
+         // console.log('Im in backend');
+         return res.status(200).json({ status: false, message:"user already exist"});}
+       });
+    
+    
   
   
 
@@ -58,11 +69,11 @@ module.exports.authenticate = (req, res, next) => {
         // registered user
         else if (user){
             console.log(user);
-             return res.status(200).json({ "token": jwt.sign({ _id:user._id},
+             return res.status(200).json({ "token": jwt.sign({ _id:user._id,role:user.role},
                 process.env.JWT_SECRET,
             {
                 expiresIn: process.env.JWT_EXP
-            }) ,"role":user.email});
+            }) });
         }
         // unknown user or wrong password
         else return res.status(404).json(info);
@@ -211,11 +222,11 @@ var storage = multer.diskStorage({
   var upload = multer({storage: storage}).single('photo');
 
 
-module.exports.savefile=(req,res)=>{console.log('save')
+module.exports.savefile=(req,res)=>{
     upload(req,res,function(err){
         if(err){
             return res.status(501).json({error:err});
-        }
+        }console.log('uploaded')
         //do all database record saving activity
         return res.json({originalname:req.file.originalname, uploadname:req.file.filename});
     });
