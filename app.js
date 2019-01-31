@@ -10,7 +10,7 @@ const passport = require('passport');
 const rtsIndex = require('./routes/index.router');
 
 var app = express();
-app.use(function(req, res, next) { //allow cross origin requests
+app.all(function(req, res, next) { //allow cross origin requests
     res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
