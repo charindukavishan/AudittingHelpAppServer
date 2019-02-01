@@ -10,16 +10,15 @@ const passport = require('passport');
 const rtsIndex = require('./routes/index.router');
 
 var app = express();
-app.all(function(req, res, next) { //allow cross origin requests
+app.use(function(req, res, next) { //allow cross origin requests
     res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
     res.header("Access-Control-Allow-Origin", "http://192.81.214.34:8080");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Credentials","true");
+    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Credentials", "true");
     next();
 });
-app.use(express.static(__dirname + '/uploads')); 
 app.use(cors({ origin: 'http://192.81.214.34:8080' }));
-app.use(bodyParser.urlencoded());
+
 // middleware
 app.use(bodyParser.json());
 

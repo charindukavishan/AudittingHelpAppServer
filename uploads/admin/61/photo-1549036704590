@@ -1,0 +1,127 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Nov 27, 2018 at 03:30 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.6.20
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `university`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adminfile`
+--
+
+CREATE TABLE `adminfile` (
+  `userId` int(11) NOT NULL,
+  `sendto` int(11) NOT NULL,
+  `originalname` varchar(256) NOT NULL,
+  `mimetype` varchar(256) NOT NULL,
+  `filename` varchar(256) NOT NULL,
+  `path` varchar(256) NOT NULL,
+  `time` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `adminfile`
+--
+
+INSERT INTO `adminfile` (`userId`, `sendto`, `originalname`, `mimetype`, `filename`, `path`, `time`) VALUES
+(60, 61, 'New Text Document.txt', 'text/plain', 'photo-1542614569839', 'uploads\\admin\\61\\photo-1542614569839', '1542614569843'),
+(60, 61, 'usecase.pdf', 'application/pdf', 'photo-1542614570000', 'uploads\\admin\\61\\photo-1542614570000', '1542614570022');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `files`
+--
+
+CREATE TABLE `files` (
+  `userId` int(11) NOT NULL,
+  `to` int(11) DEFAULT NULL,
+  `originalname` varchar(256) NOT NULL,
+  `mimetype` varchar(256) NOT NULL,
+  `filename` varchar(256) NOT NULL,
+  `path` varchar(256) NOT NULL,
+  `time` varchar(256) NOT NULL,
+  `isRead` varchar(11) NOT NULL DEFAULT 'no'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `files`
+--
+
+INSERT INTO `files` (`userId`, `to`, `originalname`, `mimetype`, `filename`, `path`, `time`, `isRead`) VALUES
+(61, NULL, 'CV.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'photo-1542614399978', 'uploads\\user\\61\\photo-1542614399978', '1542614399997', 'no'),
+(61, NULL, 'CV.pdf', 'application/pdf', 'photo-1542614400275', 'uploads\\user\\61\\photo-1542614400275', '1542614400281', 'no'),
+(61, NULL, 'De_42O8Q.jpeg', 'image/jpeg', 'photo-1542614400365', 'uploads\\user\\61\\photo-1542614400365', '1542614400367', 'no'),
+(61, NULL, 'New Text Document.txt', 'text/plain', 'photo-1542614400441', 'uploads\\user\\61\\photo-1542614400441', '1542614400445', 'yes'),
+(61, NULL, 'usecase.pdf', 'application/pdf', 'photo-1542614400500', 'uploads\\user\\61\\photo-1542614400500', '1542614400503', 'yes'),
+(61, NULL, 'Doc1.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'photo-1543005109086', 'uploads\\user\\61\\photo-1543005109086', '1543005109110', 'no'),
+(5, NULL, 'CV.pdf', 'application/pdf', 'photo-1543327948979', 'uploads\\user\\5bfcddf0569538a724d6e347\\photo-1543327948979', '1543327949002', 'no');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `_id` bigint(20) UNSIGNED NOT NULL,
+  `role` varchar(10) NOT NULL DEFAULT 'user',
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `tel` varchar(255) NOT NULL,
+  `nic` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `temptoken` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`_id`, `role`, `firstName`, `lastName`, `email`, `tel`, `nic`, `password`, `temptoken`) VALUES
+(60, 'admin', 'charindu', 'kavishan', 'charindukavishan@gmail.com', '7657686', '23452367', 'charindu123', 'req.body.temptoken'),
+(61, 'user', 'madusanka', 'sandaruwan', 'madu@gmail.com', '7657686', '23452367', 'charindu123', 'req.body.temptoken'),
+(62, 'user', 'dsghg', 'dfjd', 'charindukav@gmail.com', 'sdth', 'fgjh', 'wwwwww', 'req.body.temptoken');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`_id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `_id` (`_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
