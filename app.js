@@ -12,12 +12,12 @@ const rtsIndex = require('./routes/index.router');
 var app = express();
 app.use(function(req, res, next) { //allow cross origin requests
     res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
-    res.header("Access-Control-Allow-Origin", "http://192.81.214.34:8080");
+    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Credentials", "true");
     next();
 });
-app.use(cors({ origin: 'http://192.81.214.34:8080' }));
+app.use(cors({ origin: 'http://localhost:4200' }));
 
 // middleware
 app.use(bodyParser.json());
