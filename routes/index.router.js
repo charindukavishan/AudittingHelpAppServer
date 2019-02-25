@@ -28,6 +28,10 @@ router.get('/rfiles/:id',admincntrl.files)
 router.get('/userfiles',admincntrl.userfiles)
 router.get('/admindoc',admincntrl.adminfiles)
 router.get('/messages',admincntrl.messages)
+
+router.post('/block',ctrlUser.block);
+router.post('/unblock',ctrlUser.unblock);
+router.post('/username',ctrlUser.username)
 // router.get('/file/:filename',filecntrl.file)
 module.exports = router;
 

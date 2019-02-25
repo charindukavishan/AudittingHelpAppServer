@@ -61,7 +61,7 @@ module.exports.register = (req, res, next) => {
 
 }
 
-module.exports.authenticate = (req, res, next) => {
+module.exports.authenticate = (req, res, next) => {console.log("test")
     // call for passport authentication
     passport.authenticate('local', (err, user, info) => {       
         // error from passport middleware
@@ -258,6 +258,40 @@ module.exports.readmsg=(req,res)=>{console.log(req.params.file)
             return res.json({sucsess:true,message:'message read'});
         }
        });
+
+}
+
+module.exports.block=(req,res)=>{
+     connection.query('UPDATE users SET isblock = 1 where _id = ?',req.body.id, function (error, results, fields) {
+        if(error){
+          return  res.json({sucsess:false,message:error})
+        }
+        else{console.log(results)
+            return res.json({sucsess:true,message:'message read'});
+        }
+       });
+
+}
+module.exports.unblock=(req,res)=>{
+    connection.query('UPDATE users SET isblock = 0 where _id = ?',req.body.id, function (error, results, fields) {
+       if(error){
+         return  res.json({sucsess:false,message:error})
+       }
+       else{console.log(results)
+           return res.json({sucsess:true,message:'message read'});
+       }
+      });
+
+}
+
+module.exports.username=(req,res)=>{
+    connection.query('SELECT firstName FROM users WHERE _id= 60',req.body.id, function (error, results, fields) {
+        let user=results[0].firstName;
+        if(error){
+         return  res.json({sucsess:false,user});
+       }
+       return res.status(200).json({ status: true, user});
+      });
 
 }
 
